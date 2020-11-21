@@ -1,4 +1,4 @@
-package com.example.level6_task1.ui
+package com.example.level6_task2.ui
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.level6_task1.R
-import com.example.level6_task1.ui.data.ColorItem
-import kotlinx.android.synthetic.main.item_color.view.*
+import com.example.level6_task2.R
+import com.example.level6_task2.ui.data.Movie
+import kotlinx.android.synthetic.main.item_movie.view.*
 
-class ColorAdapter(private val colors: List<ColorItem>, private val onClick: (ColorItem) -> Unit) :
-    RecyclerView.Adapter<ColorAdapter.ViewHolder>() {
+class MovieAdapter(private val colors: List<Movie>, private val onClick: (Movie) -> Unit) :
+    RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     private lateinit var context: Context
 
@@ -19,7 +19,7 @@ class ColorAdapter(private val colors: List<ColorItem>, private val onClick: (Co
         context = parent.context
 
         return ViewHolder(
-            LayoutInflater.from(context).inflate(R.layout.item_color, parent, false)
+            LayoutInflater.from(context).inflate(R.layout.item_movie, parent, false)
         )
     }
 
@@ -32,7 +32,7 @@ class ColorAdapter(private val colors: List<ColorItem>, private val onClick: (Co
             itemView.setOnClickListener { onClick(colors[adapterPosition]) }
         }
 
-        fun bind(colorItem: ColorItem) {
+        fun bind(colorItem: Movie) {
             Glide.with(context).load(colorItem.getImageUrl()).into(itemView.ivColor)
         }
     }

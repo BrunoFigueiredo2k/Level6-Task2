@@ -1,4 +1,4 @@
-package com.example.level6_task1.ui
+package com.example.level6_task2.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,17 +9,17 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.level6_task1.R
-import com.example.level6_task1.ui.data.ColorItem
+import com.example.level6_task2.R
+import com.example.level6_task2.ui.data.Movie
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.fragment_color.*
+import kotlinx.android.synthetic.main.fragment_movie.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class ColorFragment : Fragment() {
-    private val colors = arrayListOf<ColorItem>()
-    private lateinit var colorAdapter: ColorAdapter
+class MovieFragment : Fragment() {
+    private val colors = arrayListOf<Movie>()
+    private lateinit var colorAdapter: MovieAdapter
     private val viewModel: ColorViewModel by viewModels()
 
     private fun observeColors() {
@@ -35,20 +35,20 @@ class ColorFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_color, container, false)
+        return inflater.inflate(R.layout.fragment_movie, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        colorAdapter = ColorAdapter(colors, ::onColorClick)
+        colorAdapter = MovieAdapter(colors, ::onColorClick)
         rvColors.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         rvColors.adapter = colorAdapter
 
         observeColors()
     }
 
-    private fun onColorClick(colorItem: ColorItem) {
+    private fun onColorClick(colorItem: Movie) {
         Snackbar.make(rvColors, "This color is: ${colorItem.name}", Snackbar.LENGTH_LONG).show()
     }
 

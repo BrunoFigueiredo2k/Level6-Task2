@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.level6_task1.ui.ColorFragment"
+        android:name="com.example.level6_task2.ui.MovieFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_color">
+        tools:layout="@layout/fragment_movie">
     </fragment>
 </navigation>

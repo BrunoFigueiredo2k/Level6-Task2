@@ -1,4 +1,4 @@
-package com.example.level6_task1
+package com.example.level6_task2
 
 import org.junit.Test
 
