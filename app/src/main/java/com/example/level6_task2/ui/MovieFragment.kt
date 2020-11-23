@@ -20,10 +20,10 @@ import kotlinx.android.synthetic.main.fragment_movie.*
 class MovieFragment : Fragment() {
     private val colors = arrayListOf<Movie>()
     private lateinit var colorAdapter: MovieAdapter
-    private val viewModel: ColorViewModel by viewModels()
+    private val viewModel: MovieViewModel by viewModels()
 
     private fun observeColors() {
-        viewModel.colorItems.observe(viewLifecycleOwner, Observer {
+        viewModel.movieItem.observe(viewLifecycleOwner, Observer {
             colors.clear()
             colors.addAll(it)
             colorAdapter.notifyDataSetChanged()
@@ -41,15 +41,15 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        colorAdapter = MovieAdapter(colors, ::onColorClick)
+        colorAdapter = MovieAdapter(colors)
         rvColors.layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         rvColors.adapter = colorAdapter
 
         observeColors()
     }
 
-    private fun onColorClick(colorItem: Movie) {
-        Snackbar.make(rvColors, "This color is: ${colorItem.name}", Snackbar.LENGTH_LONG).show()
-    }
+//    private fun onColorClick(colorItem: Movie) {
+//        Snackbar.make(rvColors, "This color is: ${colorItem.name}", Snackbar.LENGTH_LONG).show()
+//    }
 
 }

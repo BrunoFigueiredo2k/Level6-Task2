@@ -10,7 +10,7 @@ import com.example.level6_task2.R
 import com.example.level6_task2.ui.data.Movie
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MovieAdapter(private val colors: List<Movie>, private val onClick: (Movie) -> Unit) :
+class MovieAdapter(private val movies: List<Movie>) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     private lateinit var context: Context
@@ -23,13 +23,13 @@ class MovieAdapter(private val colors: List<Movie>, private val onClick: (Movie)
         )
     }
 
-    override fun getItemCount(): Int = colors.size
+    override fun getItemCount(): Int = movies.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(colors[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(movies[position])
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {
-            itemView.setOnClickListener { onClick(colors[adapterPosition]) }
+            itemView.setOnClickListener { onClick(movies[adapterPosition]) }
         }
 
         fun bind(colorItem: Movie) {

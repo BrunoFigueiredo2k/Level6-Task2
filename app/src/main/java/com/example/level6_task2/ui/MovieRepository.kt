@@ -9,7 +9,7 @@ class MovieRepository {
             Movie("FF0000", "Red"),
             Movie("0000FF", "Blue"),
             Movie("FFFF00", "Yellow"),
-            Movie("008000", "Green")
+            Movie("008000", "Green", )
         )
     }
 }

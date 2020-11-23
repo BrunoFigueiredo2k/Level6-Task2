@@ -5,14 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.level6_task2.ui.data.Movie
 
-class ColorViewModel : ViewModel(){
+class MovieViewModel : ViewModel(){
     private val colorRepository = MovieRepository()
 
     //use encapsulation to expose as LiveData
-    val colorItems: LiveData<List<Movie>>
-        get() = _colorItems
+    val movieItem: LiveData<List<Movie>>
+        get() = _movieItems
 
-    private val _colorItems = MutableLiveData<List<Movie>>().apply {
+    private val _movieItems = MutableLiveData<List<Movie>>().apply {
         value = colorRepository.getColorItems()
     }
 }
