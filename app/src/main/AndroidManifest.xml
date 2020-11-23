@@ -14,7 +14,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.MovieDetailsActivity"></activity>
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.example.level6_task2.ui.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
