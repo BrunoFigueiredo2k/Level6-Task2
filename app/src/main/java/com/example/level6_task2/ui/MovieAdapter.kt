@@ -11,7 +11,7 @@ import com.example.level6_task2.ui.data.Movie
 import kotlinx.android.synthetic.main.item_movie.view.*
 
 // TODO: change these params
-class MovieAdapter(private val movies: List<Movie>, private val onClick: (ColorItem) -> Unit) :
+class MovieAdapter(private val movies: List<Movie>) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     private lateinit var context: Context
@@ -29,10 +29,6 @@ class MovieAdapter(private val movies: List<Movie>, private val onClick: (ColorI
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(movies[position])
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        init {
-            itemView.setOnClickListener { onClick(movies[adapterPosition]) }
-        }
-
         fun bind(movieItem: Movie) {
             Glide.with(context).load(movieItem.getMovies()).into(itemView.poster_movie)
         }
