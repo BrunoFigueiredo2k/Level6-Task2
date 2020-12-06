@@ -12,9 +12,5 @@ data class Movie(
     @SerializedName("releaseDate") var releaseDate: Date,
     @SerializedName("rating") var rating: Int,
     @SerializedName("overview") var overview: String
-) {
-    var apiKey: String = Resources.getSystem().getString(R.string.api_key);
-    //TODO: change function name to getMovie()
-    fun getMovies() = "https://api.themoviedb.org/3/discover/movie?api_key=$apiKey&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1"
-}
+)
 

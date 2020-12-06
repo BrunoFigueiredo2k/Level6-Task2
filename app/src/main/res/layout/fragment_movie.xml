@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.level6_task2.ui.MovieFragment">
 
-
     <LinearLayout
         android:id="@+id/layoutMovies"
         android:layout_width="match_parent"
@@ -32,6 +31,7 @@
             android:layout_weight="1">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/year"
                 android:layout_width="match_parent"
                 android:inputType="number"
                 android:layout_height="wrap_content"

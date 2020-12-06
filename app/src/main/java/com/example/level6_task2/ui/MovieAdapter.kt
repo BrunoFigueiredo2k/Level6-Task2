@@ -26,10 +26,12 @@ class MovieAdapter(private val movies: List<Movie>) :
 
     override fun getItemCount(): Int = movies.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(movies[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        // TODO: bind items
+    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(movieItem: Movie) {
+        fun bind(movieItem: MovieViewModel) {
             Glide.with(context).load(movieItem.getMovies()).into(itemView.poster_movie)
         }
     }

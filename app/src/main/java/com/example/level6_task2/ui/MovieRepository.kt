@@ -1,5 +1,8 @@
 package com.example.level6_task2.ui
 
+import android.util.Log
+import android.widget.Toast
+import android.widget.Toast.LENGTH_LONG
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.level6_task2.interfaces.MovieApiService
@@ -7,7 +10,7 @@ import com.example.level6_task2.ui.data.Movie
 import kotlinx.coroutines.withTimeout
 
 class MovieRepository {
-    private val triviaApiService: MovieApiService = MovieApi.createApi()
+    private val movieApiService: MovieApiService = MovieApi.createApi()
 
     private val _movie: MutableLiveData<Movie> = MutableLiveData()
 
@@ -25,14 +28,15 @@ class MovieRepository {
         try {
             //timeout the request after 5 seconds
             val result = withTimeout(5_000) {
-                triviaApiService.fetchAllMovies()
+                movieApiService.fetchAllMovies()
             }
 
             _movie.value = result
+            Log.d("movies", result.toString())
         } catch (error: Throwable) {
-            throw TriviaRefreshError("Unable to refresh trivia", error)
+            throw MovieRefreshError("Unable to refresh trivia", error)
         }
     }
 
-    class TriviaRefreshError(message: String, cause: Throwable) : Throwable(message, cause)
+    class MovieRefreshError(message: String, cause: Throwable) : Throwable(message, cause)
 }

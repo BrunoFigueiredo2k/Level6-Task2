@@ -31,15 +31,16 @@ class MovieViewModel : ViewModel(){
      * The viewModelScope is bound to Dispatchers.Main and will automatically be cancelled when the ViewModel is cleared.
      * Extension method of lifecycle-viewmodel-ktx library
      */
-    fun getMovie() {
+    fun getMovies() {
         viewModelScope.launch {
             try {
                 //the triviaRepository sets it's own livedata property
                 //our own trivia LiveData property points to te one in that repository
                 movieRepository.getMovieItems()
-            } catch (error: MovieRepository.TriviaRefreshError) {
+                Log.d("Movies", movieRepository.getMovieItems().toString())
+            } catch (error: MovieRepository.MovieRefreshError) {
                 _errorText.value = error.message
-                Log.e("Trivia error", error.cause.toString())
+                Log.e("Movie error", error.cause.toString())
             }
         }
     }
