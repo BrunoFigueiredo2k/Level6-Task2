@@ -13,7 +13,7 @@ class MovieViewModel : ViewModel(){
 
     /**
      * This property points direct to the LiveData in the repository, that value
-     * get's updated when user clicks FAB. This happens through the getTriviaNumber() in this class :)
+     * get's updated when user clicks submit button. This happens through the getMovies() in this class :)
      */
     val movie = movieRepository.movie
 
@@ -34,10 +34,12 @@ class MovieViewModel : ViewModel(){
     fun getMovies() {
         viewModelScope.launch {
             try {
-                //the triviaRepository sets it's own livedata property
-                //our own trivia LiveData property points to te one in that repository
-                movieRepository.getMovieItems()
+                //the movieRepository sets it's own livedata property
+                //our own movie LiveData property points to te one in that repository
+                val movies = movieRepository.getMovieItems()
+
                 Log.d("Movies", movieRepository.getMovieItems().toString())
+
             } catch (error: MovieRepository.MovieRefreshError) {
                 _errorText.value = error.message
                 Log.e("Movie error", error.cause.toString())
