@@ -8,7 +8,7 @@
 
 
     <ImageView
-        android:id="@+id/backdrop_img"
+        android:id="@+id/ivBackdropImg"
         android:layout_width="0dp"
         android:layout_height="230dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,12 +24,13 @@
         android:padding="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backdrop_img">
+        app:layout_constraintTop_toBottomOf="@+id/ivBackdropImg">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/ivPosterImg"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
+            android:paddingRight="10dp"
             android:layout_weight="1"
             tools:srcCompat="@tools:sample/avatars" />
 
@@ -40,37 +41,38 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/title"
+                android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                android:textSize="22dp"
+                android:textSize="30dp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/release_date"
+                android:id="@+id/tvReleaseDate"
                 android:paddingTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
 
             <TextView
-                android:id="@+id/rating"
-                android:paddingTop="15dp"
+                android:id="@+id/tvRating"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:text="TextView"
                 android:textColor="@color/colorBlue"
-                android:textStyle="bold"
-                android:text="TextView" />
+                android:textStyle="bold" />
+
         </LinearLayout>
     </LinearLayout>
 
     <TextView
-        android:id="@+id/title_overview"
+        android:id="@+id/tvTitleOverview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:text="TextView"
+        android:text="@string/overview"
         android:textAlignment="textStart"
         android:textSize="23dp"
         android:textStyle="bold"
@@ -79,14 +81,14 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <TextView
-        android:id="@+id/overview_txt"
-        android:layout_width="0dp"
+        android:id="@+id/tvOverview"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:padding="10dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_overview"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitleOverview"
         app:lineHeight="2dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,26 +13,19 @@ import kotlinx.coroutines.withTimeout
 class MovieRepository {
     private val movieApiService: MovieApiService = MovieApi.createApi()
 
-    private val _movies: MutableLiveData<List<ResultSetWithMovies>> = MutableLiveData()
+    private val _movies: MutableLiveData<ArrayList<Movie>> = MutableLiveData()
 
-    /**
-     * Expose non MutableLiveData via getter
-     * Encapsulation :)
-     */
-    val movie: LiveData<List<ResultSetWithMovies>>
+    val movie: LiveData<ArrayList<Movie>>
         get() = _movies
 
-    /**
-     * suspend function that calls a suspend function from the numbersApi call
-     */
-    suspend fun getMovieItems()  {
+    suspend fun getMovieItem(year: String)  {
         try {
             //timeout the request after 5 seconds
             val result : ResultSetWithMovies = withTimeout(5_000) {
-                movieApiService.fetchAllMovies()
+                movieApiService.fetchAllMovies(year)
             }
 
-            _movies.value = listOf(result)
+            _movies.value = result.movies
             Log.d("movies", result.toString())
         } catch (error: Throwable) {
             throw MovieRefreshError("Unable to refresh movies", error)

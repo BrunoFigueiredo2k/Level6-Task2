@@ -11,34 +11,17 @@ import kotlinx.coroutines.launch
 class MovieViewModel : ViewModel(){
     private val movieRepository = MovieRepository()
 
-    /**
-     * This property points direct to the LiveData in the repository, that value
-     * get's updated when user clicks submit button. This happens through the getMovies() in this class :)
-     */
-    val movie = movieRepository.movie
+    val movies = movieRepository.movie
 
     private val _errorText: MutableLiveData<String> = MutableLiveData()
 
-    /**
-     * Expose non MutableLiveData via getter
-     * errorText can be observed from view for error showing
-     * Encapsulation :)
-     */
     val errorText: LiveData<String>
         get() = _errorText
 
-    /**
-     * The viewModelScope is bound to Dispatchers.Main and will automatically be cancelled when the ViewModel is cleared.
-     * Extension method of lifecycle-viewmodel-ktx library
-     */
-    fun getMovies() {
+    fun getMovies(year: String) {
         viewModelScope.launch {
             try {
-                //the movieRepository sets it's own livedata property
-                //our own movie LiveData property points to te one in that repository
-                val movies = movieRepository.getMovieItems()
-
-                Log.d("Movies", movieRepository.getMovieItems().toString())
+                movieRepository.getMovieItem(year)
 
             } catch (error: MovieRepository.MovieRefreshError) {
                 _errorText.value = error.message

@@ -1,5 +1,6 @@
 package com.example.level6_task2.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -20,15 +21,18 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_movie.*
 
 class MovieFragment : Fragment() {
-    private val movies = arrayListOf<ResultSetWithMovies>()
+    private val movies = arrayListOf<Movie>()
     private val viewModel: MovieViewModel by viewModels()
-    private lateinit var movieAdapter: MovieAdapter
+    private val movieAdapter =
+        MovieAdapter(movies) { movie ->
+            onMovieClick(movie)
+        }
     lateinit var layoutManager: LinearLayoutManager
 
     private fun observeMovies() {
-        viewModel.movie.observe(viewLifecycleOwner, Observer {
+        viewModel.movies.observe(viewLifecycleOwner, Observer {movie ->
             movies.clear()
-            movies.addAll(it)
+            movies.addAll(movie)
             movieAdapter.notifyDataSetChanged()
         })
     }
@@ -50,7 +54,6 @@ class MovieFragment : Fragment() {
             fetchMoviesByYear()
         }
 
-        movieAdapter = MovieAdapter(movies, ::onMovieClick)
         rvMovies.layoutManager = GridLayoutManager(context, 2)
         rvMovies.adapter = movieAdapter
 
@@ -59,9 +62,12 @@ class MovieFragment : Fragment() {
 
     // Function to fetch movies from API
     private fun fetchMoviesByYear(){
-        if (year.text.toString().isNotBlank()){
-            viewModel.getMovies()
-            Log.d("movies", viewModel.getMovies().toString())
+        val year  = year.text.toString()
+        if (year.isNotBlank()){
+            // Take the first four numbers in the string, which are the year we want
+            // TODO: fix this bit to take get movies based on year input
+            viewModel.getMovies(year.take(4))
+            Log.d("movies", viewModel.getMovies(year).toString())
         } else {
             Toast.makeText(context, "Input is empty", LENGTH_LONG).show()
             Log.d("emptyInput", "Input is empty")
@@ -70,10 +76,12 @@ class MovieFragment : Fragment() {
 
     // Click listener for specific movie
     // TODO: add open movie specific page onclick that movie
-    private fun onMovieClick(movie: ResultSetWithMovies) {
-        // TODO: fix this to display clicked movie and not all movies (index of array)
-        Snackbar.make(rvMovies, "Clicked movie title: ${movie.movies[0].title}", Snackbar.LENGTH_LONG).show()
-        Log.d("movieObject", "Movie object: ${movie.movies}")
+    private fun onMovieClick(movie: Movie) {
+//        Snackbar.make(rvMovies, "Clicked movie title: ${movie.title}", Snackbar.LENGTH_LONG).show()
+        // Open details activity of clicked movie
+        val intent = Intent(context, MovieDetailsActivity::class.java)
+        intent.putExtra("movie", movie)
+        startActivity(intent)
     }
 
 }

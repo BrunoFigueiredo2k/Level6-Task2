@@ -1,7 +1,10 @@
 package com.example.level6_task2.ui.data
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Movie(
     @SerializedName("backdrop_path")
     var backdropImg: String,
@@ -20,4 +23,8 @@ data class Movie(
 
     @SerializedName("overview")
     var overview: String
-)
+) : Parcelable
+{
+    // Function to get backdrop image file name
+    fun getImageUrl() = "https://image.tmdb.org/t/p/w500${posterImg}"
+}

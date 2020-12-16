@@ -15,7 +15,7 @@ import com.example.level6_task2.ui.data.Movie
 import kotlinx.android.synthetic.main.activity_movie_details.view.*
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MovieAdapter(private val movies: MutableList<ResultSetWithMovies>, private val onClick: (ResultSetWithMovies) -> Unit) :
+class MovieAdapter(private val movies: List<Movie>, private val onClick: (Movie) -> Unit) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     private lateinit var context: Context
@@ -30,19 +30,16 @@ class MovieAdapter(private val movies: MutableList<ResultSetWithMovies>, private
 
     override fun getItemCount(): Int = movies.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.databind(movies[position], position)
-    }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.databind(movies[position], position)
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {
             itemView.setOnClickListener { onClick(movies[adapterPosition]) }
         }
         @SuppressLint("SetTextI18n")
-        fun databind(movie: ResultSetWithMovies, position: Int) {
-//            itemView.poster_movie.setImageResource(movies[position])
+        fun databind(movie: Movie, position: Int) {
             itemView.number_movie.text = (position + 1).toString()
-            Glide.with(context).load(movie.getImageUrl(position)).into(itemView.poster_movie)
+            Glide.with(context).load(movie.getImageUrl()).into(itemView.poster_movie)
         }
 
     }
