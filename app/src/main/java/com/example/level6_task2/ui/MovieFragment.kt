@@ -64,10 +64,8 @@ class MovieFragment : Fragment() {
     private fun fetchMoviesByYear(){
         val year  = year.text.toString()
         if (year.isNotBlank()){
-            // Take the first four numbers in the string, which are the year we want
-            // TODO: fix this bit to take get movies based on year input
-            viewModel.getMovies(year.take(4))
-            Log.d("movies", viewModel.getMovies(year).toString())
+            val yearInt = year.toInt() // Convert year string to integer so it can be passed to getMovies method
+            viewModel.getMovies(yearInt)
         } else {
             Toast.makeText(context, "Input is empty", LENGTH_LONG).show()
             Log.d("emptyInput", "Input is empty")
@@ -75,10 +73,8 @@ class MovieFragment : Fragment() {
     }
 
     // Click listener for specific movie
-    // TODO: add open movie specific page onclick that movie
     private fun onMovieClick(movie: Movie) {
-//        Snackbar.make(rvMovies, "Clicked movie title: ${movie.title}", Snackbar.LENGTH_LONG).show()
-        // Open details activity of clicked movie
+        // Open details activity of clicked movie and send movie so data of that movie can be displayed
         val intent = Intent(context, MovieDetailsActivity::class.java)
         intent.putExtra("movie", movie)
         startActivity(intent)

@@ -1,8 +1,6 @@
 package com.example.level6_task2.ui
 
 import android.util.Log
-import android.widget.Toast
-import android.widget.Toast.LENGTH_LONG
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.level6_task2.interfaces.MovieApiService
@@ -18,7 +16,7 @@ class MovieRepository {
     val movie: LiveData<ArrayList<Movie>>
         get() = _movies
 
-    suspend fun getMovieItem(year: String)  {
+    suspend fun getMovieItem(year: Int)  {
         try {
             //timeout the request after 5 seconds
             val result : ResultSetWithMovies = withTimeout(5_000) {

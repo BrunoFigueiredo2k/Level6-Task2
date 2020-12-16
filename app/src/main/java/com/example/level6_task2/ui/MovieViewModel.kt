@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.level6_task2.ui.data.Movie
 import kotlinx.coroutines.launch
 
 class MovieViewModel : ViewModel(){
@@ -18,7 +17,7 @@ class MovieViewModel : ViewModel(){
     val errorText: LiveData<String>
         get() = _errorText
 
-    fun getMovies(year: String) {
+    fun getMovies(year: Int) {
         viewModelScope.launch {
             try {
                 movieRepository.getMovieItem(year)
